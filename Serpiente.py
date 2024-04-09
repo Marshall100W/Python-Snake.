@@ -138,8 +138,6 @@ ppal.bind('<Down>', func_cursor)
 ppal.bind('<Right>', func_cursor)
 ppal.bind('<Left>', func_cursor)
 
-
-
 inicio('x')
 
 ppal.mainloop()
