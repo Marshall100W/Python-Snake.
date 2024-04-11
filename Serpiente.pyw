@@ -22,7 +22,8 @@ fin = False
 
 direcc_x = 0
 direcc_y = 0
-
+comida_x = -TAMAÑO_BLOQUE
+comida_y = -TAMAÑO_BLOQUE
 
 def inicio(event):
     global comida_x, comida_y, snake, head_x, head_y, fin, ppal_canvas, puntos, vel_snake, vel_snake_
@@ -38,9 +39,8 @@ def inicio(event):
 
     head_x = random.randint(3,int((ANCHO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
     head_y = random.randint(3,int((ALTO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
-    comida_x = random.randint(3,int((ANCHO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
-    comida_y = random.randint(3,int((ALTO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
-    print(head_x, head_y)
+    # comida_x = random.randint(3,int((ANCHO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
+    # comida_y = random.randint(3,int((ALTO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
 
     snake = [[head_x,head_y], [head_x+TAMAÑO_BLOQUE*1,head_y], [head_x+TAMAÑO_BLOQUE*2,head_y],[head_x+TAMAÑO_BLOQUE*3,head_y], [head_x+TAMAÑO_BLOQUE*4,head_y]]
 
@@ -81,6 +81,8 @@ def score():
     puntos += 1
     label_puntos = Label(ppal, text='SCORE: {}  '.format(puntos), font=(35))
     label_puntos.place(x=500, y=30)
+    print('Control')
+
 
 def colision():
     global fin, vel_snake, vel_snake_
@@ -116,20 +118,20 @@ def mov_snake():
         snake.insert(0, [head_x,head_y])
 
         for i in snake:
-            ppal_canvas.create_rectangle(i[0],i[1],i[0]+TAMAÑO_BLOQUE, i[1]+TAMAÑO_BLOQUE, fill='light green')
+            ppal_canvas.create_rectangle(i[0],i[1],i[0]+TAMAÑO_BLOQUE, i[1]+TAMAÑO_BLOQUE, fill='light green', outline='light green')
 
         colision()
-        print('Vel_snake:', vel_snake)
     if not fin:
         ppal.after(FPS, mov_snake)
 
 
 def comida():
     global comida_x, comida_y
-    ppal_canvas.create_rectangle(comida_x, comida_y, comida_x + TAMAÑO_BLOQUE, comida_y + TAMAÑO_BLOQUE, fill='green')
+    ppal_canvas.create_rectangle(comida_x, comida_y, comida_x + TAMAÑO_BLOQUE, comida_y + TAMAÑO_BLOQUE, fill='green', outline='green')
     comida_x = random.randint(3,int((ANCHO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
     comida_y = random.randint(3,int((ALTO_VERDE/TAMAÑO_BLOQUE))-3)*TAMAÑO_BLOQUE
-    ppal_canvas.create_rectangle(comida_x, comida_y, comida_x + TAMAÑO_BLOQUE, comida_y + TAMAÑO_BLOQUE, fill='red')
+    ppal_canvas.create_rectangle(comida_x, comida_y, comida_x + TAMAÑO_BLOQUE, comida_y + TAMAÑO_BLOQUE, fill='red', outline='green')
+    print('Comida:', comida_x, '-', comida_y)
 
 
 ##########################################################################################################################################
@@ -147,3 +149,5 @@ ppal.bind('<Left>', func_cursor)
 inicio('x')
 
 ppal.mainloop()
+
+
